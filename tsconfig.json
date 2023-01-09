@@ -1,7 +1,7 @@
 {
     "compilerOptions": {
         "target": "es6",
-        "module": "CommonJS",
+        "module": "esnext",
         "resolveJsonModule": true,
         "esModuleInterop": true,
         "moduleResolution": "node",
@@ -11,13 +11,13 @@
         "watch": true
     },
     "ts-node": {
-    "esm": true,
-    "experimentalSpecifierResolution": "node"
+        "esm": true,
+        "experimentalSpecifierResolution": "node"
     },
     "include": ["src/**/*.ts"],
     "exclude": [
         "node_modules",
         "test",
-        // "dist"
+        "dist"
     ]
 }
