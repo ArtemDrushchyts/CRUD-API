@@ -1,10 +1,11 @@
 import * as dotenv from 'dotenv';
 import { createServer } from 'http';
+import { listener } from './handlers/listener';
 
 dotenv.config();
 
 const port = process.env.PORT;
-const server = createServer();
+const server = createServer(listener);
 
 const startServer = () => {
     server.listen(port, () => {
