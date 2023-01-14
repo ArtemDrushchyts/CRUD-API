@@ -1,6 +1,6 @@
 import * as dotenv from 'dotenv';
 import { createServer } from 'http';
-import { listener } from './handlers/listener';
+import { listener } from './controller/listener';
 
 dotenv.config();
 

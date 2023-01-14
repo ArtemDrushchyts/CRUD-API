@@ -1,32 +1,42 @@
 import { IncomingMessage, ServerResponse } from 'http';
+import { Controller } from './controller';
+import { getBody} from '../utils/helpers'
+
+const controler = new Controller();
 
 export const listener = async (request: IncomingMessage, response: ServerResponse) => {
     response.setHeader('Content-Type', 'application/json');
     
     const {url, method} = request;
     const [api, users, id, ...args] = url.split('/').filter(Boolean);
-    console.log(url)
+
+    const body = await getBody(request);
+    console.log(body)
 
     if(`${api}/${users}` === 'api/users' && !args.length) {
-        let result: any[];
+        let result;
         let statusCode: number = 200;
         try {
             switch(method) {
                 case 'GET':
-                    result = []
+                    if(id) {
+                        result = await controler.getUser(id)
+                    } else {
+                        result = await controler.getUsers()
+                    }
                     console.log('GET');
                     break;
                 case 'POST':
                     console.log('POST');
-                    result = []
+                    result = await controler.create(body);
                     break;
                 case 'DELETE':
                     console.log('DELETE');
-                    result = []
+                    result = await controler.delete(id);
                     break;
                 case 'PUT':
                     console.log('PUT')
-                    result = []
+                    result = await controler.update(id, body)
                     break;
                 default:
                     console.log('no such method exists')
