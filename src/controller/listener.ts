@@ -1,6 +1,7 @@
 import { IncomingMessage, ServerResponse } from 'http';
 import { Controller } from './controller';
-import { getBody} from '../utils/helpers'
+import { getBody, checkID } from '../utils/helpers';
+import { ErrorMessage, code } from '../constants/message';
 
 const controler = new Controller();
 
@@ -11,15 +12,15 @@ export const listener = async (request: IncomingMessage, response: ServerRespons
     const [api, users, id, ...args] = url.split('/').filter(Boolean);
 
     const body = await getBody(request);
-    console.log(body)
 
     if(`${api}/${users}` === 'api/users' && !args.length) {
         let result;
-        let statusCode: number = 200;
+        let statusCode: number = code.ok;
         try {
             switch(method) {
                 case 'GET':
                     if(id) {
+                        await checkID(id, response, await controler.getUsers());
                         result = await controler.getUser(id)
                     } else {
                         result = await controler.getUsers()
@@ -49,7 +50,7 @@ export const listener = async (request: IncomingMessage, response: ServerRespons
             console.log('err', err)
         }
     } else {
-        response.writeHead(404, { 'Content-Type': 'application/json' });
-        response.end(JSON.stringify({ code: 404,  message: 'Endpoint does not exist' }));
+        response.writeHead(code.notFound, { 'Content-Type': 'application/json' });
+        response.end(JSON.stringify({ code: code.notFound,  message: ErrorMessage.nonExistEndpoint }));
     }
 }
