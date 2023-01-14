@@ -1,4 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
+import { IUser } from '../model/User.model'
 
 export class User {
     id: string;
@@ -23,6 +24,7 @@ export class Controller {
         const uniqueID= uuidv4();
         const newUser = { id: uniqueID, ...body}
         await this.users.push(newUser);
+        return newUser
     }
 
     async update(id: string, params) {
