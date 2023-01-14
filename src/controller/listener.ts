@@ -39,7 +39,7 @@ export const listener = async (request: IncomingMessage, response: ServerRespons
                     statusCode = code.noContent;
                     break;
                 case 'PUT':
-                    await checkBodyProperties(body, response);
+                    await checkID(id, response, await controler.getUsers());
                     const checkProperties: boolean = await checkBodyProperties(body, response);
                     if(!checkProperties) return
                     result = await controler.update(id, body)

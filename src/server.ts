@@ -4,7 +4,7 @@ import { listener } from './controller/listener';
 
 dotenv.config();
 
-const port = process.env.PORT;
+const port = process.env.PORT || 4000;
 const server = createServer(listener);
 
 const startServer = () => {
