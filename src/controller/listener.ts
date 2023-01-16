@@ -45,7 +45,8 @@ export const listener = async (request: IncomingMessage, response: ServerRespons
                     result = await controler.update(id, body)
                     break;
                 default:
-                    console.log('no such method exists')
+                    response.writeHead(code.badRequest, { 'Content-Type': 'application/json' });
+                    response.end(JSON.stringify({ code: code.badRequest,  message: ErrorMessage.methodNotSupported }));
                     break;
             }
 
