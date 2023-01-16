@@ -15,6 +15,10 @@ Run the application in production mode
 ```
 npm run start:prod
 ```
+Run the tests
+```
+npm run test
+```
 ## 💻 API
 Implemented endpoint `api/users`
 

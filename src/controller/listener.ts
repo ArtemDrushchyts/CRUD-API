@@ -53,7 +53,6 @@ export const listener = async (request: IncomingMessage, response: ServerRespons
             response.writeHead(statusCode);
             response.end(JSON.stringify(result));
         } catch (err) {
-            console.log('err', err)
         }
     } else {
         response.writeHead(code.notFound, { 'Content-Type': 'application/json' });
