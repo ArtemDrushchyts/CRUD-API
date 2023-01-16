@@ -1,0 +1,23 @@
+{
+    "compilerOptions": {
+        "target": "es6",
+        "module": "commonjs",
+        "resolveJsonModule": true,
+        "esModuleInterop": true,
+        "moduleResolution": "node",
+        "outDir": "./dist",
+        "forceConsistentCasingInFileNames": true,
+        "sourceMap": true,
+        "watch": true
+    },
+    "ts-node": {
+        "esm": true,
+        "experimentalSpecifierResolution": "node"
+    },
+    "include": ["src/**/*.ts"],
+    "exclude": [
+        "node_modules",
+        "src/__test__",
+        "dist"
+    ]
+}
